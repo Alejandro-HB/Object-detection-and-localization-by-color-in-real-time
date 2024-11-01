@@ -46,6 +46,12 @@ def draw_contours_on_image(input_image, depth_image, mask, model):
         cx=x + w // 2
         cy=y + h // 2
         cv2.circle(input_image, (cx, cy), 2, (0, 0, 255), -1)
+        # Get object color from mask
+        color=mask[cy, cx]
+        B=int(color[0])
+        G=int(color[1])
+        R=int(color[2])
+        cv2.rectangle(input_image, (x-20, y-10), (x-5, y), (B, G, R), -1)
         # Distance to camera
         distance=depth_image[cy, cx]
         # Formated distance
@@ -191,8 +197,8 @@ try:
         
         # cv2.namedWindow('Depth image', cv2.WINDOW_NORMAL)
         # cv2.imshow('Depth image', depth_image_norm)
-        # cv2.namedWindow('Segmentation', cv2.WINDOW_NORMAL)
-        # cv2.imshow('Segmentation', kmeans_result)
+        cv2.namedWindow('Segmentation', cv2.WINDOW_NORMAL)
+        cv2.imshow('Segmentation', kmeans_result)
         cv2.namedWindow('Bounding boxes', cv2.WINDOW_NORMAL)
         cv2.imshow('Bounding boxes', bounding_box_image)
         # cv2.namedWindow('Align Example', cv2.WINDOW_NORMAL)
@@ -201,10 +207,10 @@ try:
         
         # Press esc or 'q' to close the image window
         if key & 0xFF == ord('q') or key == 27:
-            cv2.imwrite('./images/colormap.png',depth_colormap)
-            cv2.imwrite('./images/colorImage.png',colorr_image)
-            cv2.imwrite('./images/depthImage.png',depth_image)
-            cv2.imwrite('./images/finalResult.png', color_image)
+            cv2.imwrite('./presentationImages/colormap.png',depth_colormap)
+            cv2.imwrite('./presentationImages/colorImage.png',colorr_image)
+            cv2.imwrite('./presentationImages/depthImage.png',depth_image)
+            cv2.imwrite('./presentationImages/finalResult.png', color_image)
             cv2.destroyAllWindows()
             break
         elif key==13:
