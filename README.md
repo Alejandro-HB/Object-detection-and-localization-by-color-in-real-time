@@ -1,2 +1,2 @@
 # Object-detection-and-localization-by-color-in-real-time
-Object detection and localization by color in real time Python script for "Visión por computadora" course.
+This script has been tested with an Intel Realsense D415 depth camera, Python 3.11.7 and SDK 2.55
